@@ -18,7 +18,7 @@ The card will be exhibited if 'o' is inserted in the prefix of a card title. Thi
 
 # How to use on the heroku?
 
-### 1 you get developer key & setting ENV variable
+### You get developer key & setting ENV variable
 
 Please check your developer key [from here](https://trello.com/1/appKey/generate).
 
