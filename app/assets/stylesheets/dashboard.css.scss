@@ -1,3 +1,87 @@
-// Place all the styles related to the dashboard controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "compass/css3";
+
+.dashboard_controller {
+  &.index_action {
+    font-size: 13px;
+
+    .card {
+      @include border-radius(5px);
+      @include background-image(linear-gradient(#FFFFFF, #CCCCCC));
+      border: 1px solid #CDCDCD;
+      margin-bottom: 10px;
+
+      .card_header {
+        border-bottom: 1px solid #CDCDCD;
+        overflow : hidden;
+
+        .status {
+          @include border-radius(5px);
+          color: white;
+          padding: 1px 10px;
+          margin: 1px 5px;
+          float: left;
+        }
+
+        .card_name {
+          font-size: 14px;
+          font-weight: bold;
+        }
+
+        .proposed {
+          background: #4c8099;
+        }
+
+        .planned {
+          background: #4d9399;
+        }
+
+        .started {
+          background: #999999;
+        }
+
+        .in_progress {
+          background: #555555;
+        }
+
+        .launched {
+          background: #79994c;
+        }
+      }
+
+      .checklist {
+        @include border-radius(5px);
+        border: 1px solid #999999;
+        margin: 10px;
+
+        .checklist_header {
+          overflow : hidden;
+          border-bottom: 1px solid #999999;
+        }
+
+        .item_status {
+          float: left;
+          margin: 0 5px;
+        }
+
+        .progress_rate {
+          @include border-radius(5px);
+          background: #333333;
+          color: white;
+          width: 30px;
+          margin: 1px 5px;
+          padding: 1px 10px;
+          float: left;
+        }
+
+        .name {
+          font-size: 14px;
+          font-weight: bold;
+        }
+
+        .item_name {
+
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+.checklist
+  - checklists.each do |checklist|
+    .checklist_header
+      = checklist[:checklist_name]
+    - checklist[:item_names].each do |item|
+      = render 'checklist_item', item: item

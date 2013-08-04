@@ -1,0 +1,52 @@
+- if flash[:alert_message]
+  .flush_messages
+    = flash[:alert_message]
+-# - @lists.each do |list|
+-#   = list.id
+-#   = list.name
+- @proposed.each do |card|
+  .card
+    .card_header
+      .status.proposed
+        要望
+        %i.icon-lightbulb
+      .card_name
+        = card[:card_name]
+    - unless card[:checklists].count == 0
+      = render 'checklist', checklists: card[:checklists]
+- @planned.each do |card|
+  .card
+    .card_header
+      .status.planned
+        計画
+        %i.icon-paste
+      .card_name
+        = card[:card_name]
+    - unless card[:checklists].count == 0
+      = render 'checklist', checklists: card[:checklists]
+- @in_progress.each do |card|
+  .card
+    .card_header
+      .status.in_progress
+        開発中
+        %i.icon-hand-right
+      .card_name
+        = card[:card_name]
+    - unless card[:checklists].count == 0
+      .checklist
+        - card[:checklists].each do |checklist|
+          .checklist_header
+            .progress_rate= "#{checklist[:progress_rate]}%"
+            .name= checklist[:checklist_name]
+          - checklist[:item_names].each do |item|
+            = render 'checklist_item', item: item
+- @launched.each do |card|
+  .card
+    .card_header
+      .status.launched
+        公開中
+        %i.icon-rocket
+      .card_name
+        = card[:card_name]
+    - unless card[:checklists].count == 0
+      = render 'checklist', checklists: card[:checklists]
