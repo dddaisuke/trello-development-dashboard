@@ -63,17 +63,17 @@ class DashboardController < ApplicationController
     checklist_result = []
     cards = fetch_cards(list)
     cards.each do |card|
+      next unless open_name(card.name)
       checklist_datas = []
       checklists = fetch_checklists(card)
       checklists.each do |checklist|
+        next unless open_name(checklist.name)
         checklist_data = {}
         item_names = {}
         items = fetch_items(checklist)
         items.each do |item|
-          name = item.name
-          if name =~ /^o/
-            item_names[item.id] = { name: name.slice(1, name.size) }
-          end
+          name = { name: open_name(item.name) }
+          item_names[item.id] = name if name
         end
         complete_count = 0
         incomplete_count = 0
@@ -93,19 +93,24 @@ class DashboardController < ApplicationController
         end
         item_names = item_names.map do |item_name|
           item = item_name.second
+          next unless item
           name = item[:name]
           status = item[:status]
           { name: name, status: status }
         end
         progress_rate = 0
         progress_rate = (complete_count.to_f / items.count * 100).round if complete_count != 0
-        checklist_data[:checklist_name] = checklist.name
+        checklist_data[:checklist_name] = open_name(checklist.name)
         checklist_data[:progress_rate] = progress_rate
         checklist_data[:item_names] = item_names
         checklist_datas << checklist_data
       end
-      checklist_result << { card_name: card.name, checklists: checklist_datas }
+      checklist_result << { card_name: open_name(card.name), checklists: checklist_datas }
     end
     checklist_result
+  end
+
+  def open_name(name)
+    name.slice(1, name.size) if name =~ /^o/
   end
 end
